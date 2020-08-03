@@ -88,7 +88,7 @@ def login():
 def secrets(username):
     if session['current_user']==username:
         """displays the current user page"""
-        user=User.query.filter(User.username==username).first_or_404()
+        user=User.query.filter(User.username==username).one()
         feedback=Feedback.query.filter(Feedback.username==username)
         return render_template("user_home.html", user=user, feedback=feedback)
     else:
