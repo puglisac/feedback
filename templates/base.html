@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Feedback</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand navbar-light bg-light">
+        <a class="navbar-brand" href="/">Feedback</a>
+        <div class="ml-auto">
+            <ul class="navbar-nav ">
+                {%if 'current_user' in session%}
+                <li class="nav-item">
+                    <form action="/logout" method="post"><input class=" btn btn-link" type="submit" value="logout"></form>
+                </li>
+                <li class="nav-item">
+                    {%else%}
+                    <a class="nav-link" href="/register">Register <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+                {%endif%}
+
+        </div>
+    </nav>
+    {%block title%}{%endblock%}
+    <div id="flash">{% for category, message in get_flashed_messages(with_categories=True) %}
+        <p class="alert alert-{{category}}">{{message}}</p>
+        {%endfor%} {%block content%}{%endblock%}
+
+    </div>
+
+</body>
+
+</html>

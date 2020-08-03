@@ -1,0 +1,16 @@
+{%extends "base.html"%} {%block title%}
+<h2>{{user.first_name}} {{user.last_name}}</h2>
+{%endblock%} {%block content%}
+<div class="container">
+    <p><strong>{{user.username}} </strong><i>{{user.email}}</i></p>
+    <ul class="list-group">
+        {%for item in feedback%}
+        <li class="list-group-item"><strong>{{item.title}}: </strong><span>{{item.content}}</span>
+            <form action="/feedback/{{item.id}}/update"><button class="btn btn-sm btn-info">Edit</button></form>
+            <form action="/feedback/{{item.id}}/delete" method="post"><button class="btn btn-sm btn-danger">Delete</button></form>
+        </li>
+        {%endfor%}
+    </ul>
+    <a href="/users/{{user.username}}/feedback/add"><button class="btn btn-info">Add Feedback</button></a>
+</div>
+{%endblock%}
